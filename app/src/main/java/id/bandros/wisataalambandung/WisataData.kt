@@ -15,6 +15,7 @@ object WisataData {
                 "https://www.nativeindonesia.com/de-ranch-lembang/",
                 -6.815118355085042,
                 107.62661565095186,
+                "082272605775",
                 arrayOf(WisataFotoModel(R.drawable.de_ranch_lembang_bandung_1), WisataFotoModel(R.drawable.de_ranch_lembang_bandung_2), WisataFotoModel(R.drawable.de_ranch_lembang_bandung_3))
         )
         )
@@ -26,6 +27,7 @@ object WisataData {
                 "https://www.nativeindonesia.com/jendela-alam/",
                 -6.8193725565882835,
                 107.59640559554099,
+                "082272605775",
                 arrayOf(WisataFotoModel(R.drawable.jendela_alam_bandung_1), WisataFotoModel(R.drawable.jendela_alam_bandung_1), WisataFotoModel(R.drawable.jendela_alam_bandung_1))
         )
         )
@@ -37,6 +39,7 @@ object WisataData {
                 "https://www.nativeindonesia.com/kebun-teh-sukawana/",
                 -6.776905420291548,
                 107.58390180766582,
+                "082272605775",
                 arrayOf(WisataFotoModel(R.drawable.kebun_teh_sukawana_1), WisataFotoModel(R.drawable.kebun_teh_sukawana_2), WisataFotoModel(R.drawable.kebun_teh_sukawana_3))
         )
         )
@@ -48,6 +51,7 @@ object WisataData {
                 "https://www.nativeindonesia.com/situ-cisanti-bandung/",
                 -7.208453392835664,
                 107.65708822757006,
+                "082272605775",
                 arrayOf(WisataFotoModel(R.drawable.situ_cisanti_bandung_1), WisataFotoModel(R.drawable.situ_cisanti_bandung_2), WisataFotoModel(R.drawable.situ_cisanti_bandung_3))
 
         )
@@ -60,6 +64,7 @@ object WisataData {
                 "https://www.nativeindonesia.com/pinisi-resto-dan-glamping-lakeside-rancabali-bandung/",
                 -7.167030230848054,
                 107.35418133437634,
+                "082272605775",
                 arrayOf(WisataFotoModel(R.drawable.pinisi_resto_rancabali_bandung_1), WisataFotoModel(R.drawable.pinisi_resto_rancabali_bandung_2), WisataFotoModel(R.drawable.pinisi_resto_rancabali_bandung_3))
         )
         )

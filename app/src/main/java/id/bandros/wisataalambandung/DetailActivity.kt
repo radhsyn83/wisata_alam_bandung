@@ -43,16 +43,16 @@ class DetailActivity : AppCompatActivity() {
             ))
         }
 
-        call.onClick {
-            val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:123456789")
-            startActivity(callIntent)
-        }
-
         loadProdukFoto(wisataList[pos].foto)
         sumber.text = wisataList[pos].sumber
         alamat.text = wisataList[pos].alamat
         deskripsi.text = wisataList[pos].deskripsi
+
+        call.onClick {
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:"+wisataList[pos].phone)
+            startActivity(callIntent)
+        }
 
         setUpMap()
         setUpCall()

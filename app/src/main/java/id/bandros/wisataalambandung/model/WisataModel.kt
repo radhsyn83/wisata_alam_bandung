@@ -9,6 +9,7 @@ data class WisataModel (
         val sumber: String,
         val lat: Double,
         val lon: Double,
+        val phone: String,
         val foto: Array<WisataFotoModel>
 )
 
