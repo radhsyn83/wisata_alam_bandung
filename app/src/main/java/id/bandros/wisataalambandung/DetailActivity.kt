@@ -1,5 +1,6 @@
 package id.bandros.wisataalambandung
 
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -14,6 +15,9 @@ import id.bandros.wisataalambandung.model.WisataModel
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import android.content.Intent
+import android.net.Uri
+
 
 class DetailActivity : AppCompatActivity() {
 
@@ -21,6 +25,7 @@ class DetailActivity : AppCompatActivity() {
     private var dots: Array<ImageView?>? = null
     private lateinit var wisataList: ArrayList<WisataModel>
 
+    @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
@@ -38,12 +43,19 @@ class DetailActivity : AppCompatActivity() {
             ))
         }
 
+        call.onClick {
+            val callIntent = Intent(Intent.ACTION_CALL)
+            callIntent.data = Uri.parse("tel:123456789")
+            startActivity(callIntent)
+        }
+
         loadProdukFoto(wisataList[pos].foto)
         sumber.text = wisataList[pos].sumber
         alamat.text = wisataList[pos].alamat
         deskripsi.text = wisataList[pos].deskripsi
 
         setUpMap()
+        setUpCall()
     }
 
     fun loadProdukFoto(res: Array<WisataFotoModel>) {
@@ -86,6 +98,19 @@ class DetailActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
             return
+        } else {
+            navigasi.isEnabled = true
+        }
+    }
+
+    private fun setUpCall() {
+        if (ActivityCompat.checkSelfPermission(this,
+                        android.Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    arrayOf(android.Manifest.permission.CALL_PHONE), 2)
+            return
+        } else {
+            call.isEnabled = true
         }
     }
 

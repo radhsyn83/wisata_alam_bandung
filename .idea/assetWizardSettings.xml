@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/maps/ic_place_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_call_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,9 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_google_maps" />
-                            <entry key="sourceFile" value="D:\google-maps.svg" />
+                            <entry key="outputName" value="ic_call_black_24dp" />
+                            <entry key="sourceFile" value="C:\Users\radhs" />
                           </map>
                         </option>
                       </PersistentState>

@@ -17,8 +17,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:title="Wisata Title"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="@color/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
@@ -133,25 +133,41 @@
                     android:layout_marginTop="18dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/deskripsi_label4"
-                        android:textSize="18dp"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Lokasi :"
-                        android:textAllCaps="true"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="2dp"/>
+                        android:orientation="horizontal">
+                        <Button
+                            android:id="@+id/navigasi"
+                            android:layout_width="0dp"
+                            android:enabled="false"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_move_map"
+                            android:layout_height="wrap_content"
+                            android:text="Navigasi"
+                            android:layout_marginRight="8dp"
+                            android:drawableLeft="@drawable/ic_google_maps"
+                            android:textColor="@android:color/white"
+                            android:drawableTint="@android:color/white"
+                            android:layout_marginBottom="12dp"/>
+                        <Button
+                            android:id="@+id/call"
+                            android:layout_below="@+id/deskripsi_label5"
+                            android:layout_width="0dp"
+                            android:enabled="false"
+                            android:layout_marginLeft="8dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/btn_move_map"
+                            android:layout_height="wrap_content"
+                            android:text="Telepon"
+                            android:drawableLeft="@drawable/ic_call_black_24dp"
+                            android:textColor="@android:color/white"
+                            android:drawableTint="@android:color/white"
+                            android:layout_marginBottom="12dp"/>
+                    </LinearLayout>
 
-                    <Button
-                        android:id="@+id/navigasi"
-                        android:layout_below="@+id/deskripsi_label4"
-                        android:layout_width="match_parent"
-                        android:background="@drawable/btn_move_map"
-                        android:layout_height="wrap_content"
-                        android:text="Navigasi"
-                        android:layout_marginBottom="12dp"/>
                 </RelativeLayout>
+
 
             </LinearLayout>
         </LinearLayout>
