@@ -5,18 +5,16 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import id.bandros.wisataalambandung.R
-import id.bandros.wisataalambandung.model.WisataFotoModel
+import id.bandros.wisataalambandung.activity.DetailActivity
 import id.bandros.wisataalambandung.model.WisataModel
 import kotlinx.android.synthetic.main.item_wisata.view.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.startActivity
 
-class WisataAdapter(val context: Context, private val list: ArrayList<WisataModel>, val listener: Listener) : RecyclerView.Adapter<WisataAdapter.ViewHolder>() {
-
-    interface Listener {
-        fun onItemClick(pos: Int)
-    }
-
+class WisataAdapter(val context: Context, private val list: ArrayList<WisataModel>) : RecyclerView.Adapter<WisataAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_wisata, parent, false)
         return ViewHolder(view)
@@ -30,9 +28,17 @@ class WisataAdapter(val context: Context, private val list: ArrayList<WisataMode
 
     inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view) {
         fun bind(context: Context, data: WisataModel) {
-            itemView.foto.background = context.resources.getDrawable(data.foto.get(0).foto)
-            itemView.nama.text = data.nama
-            itemView.views.onClick { listener.onItemClick(position) }
+            Glide.with(context)
+                    .load(data.lokasi.foto1)
+                    .apply(RequestOptions()
+                            .placeholder(R.drawable.placeholder))
+                    .into(itemView.foto)
+            itemView.nama.text = data.lokasi.nama
+            itemView.views.onClick {
+                context.startActivity<DetailActivity>(
+                        "id" to data.id
+                )
+            }
         }
     }
 }

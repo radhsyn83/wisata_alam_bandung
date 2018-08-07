@@ -1,4 +1,4 @@
-package id.bandros.wisataalambandung
+package id.bandros.wisataalambandung.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,6 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import id.bandros.wisataalambandung.R
 import kotlinx.android.synthetic.main.activity_maps.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 

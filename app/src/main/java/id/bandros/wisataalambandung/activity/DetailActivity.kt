@@ -1,7 +1,10 @@
-package id.bandros.wisataalambandung
+package id.bandros.wisataalambandung.activity
 
 import android.annotation.SuppressLint
+import android.app.ProgressDialog
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -9,48 +12,51 @@ import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import android.widget.LinearLayout
+import id.bandros.wisataalambandung.R
 import id.bandros.wisataalambandung.adapter.DetailFotoAdapter
 import id.bandros.wisataalambandung.model.WisataFotoModel
-import id.bandros.wisataalambandung.model.WisataModel
+import id.bandros.wisataalambandung.utils.FirestoreUtils
 import kotlinx.android.synthetic.main.activity_detail.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import android.content.Intent
-import android.net.Uri
 
 
 class DetailActivity : AppCompatActivity() {
 
     private var dotscount: Int = 0
     private var dots: Array<ImageView?>? = null
-    private lateinit var wisataList: ArrayList<WisataModel>
+    private var nama: String? = null
+    private var lat: String? = null
+    private var lon: String? = null
+    private var phone: String? = null
+    private lateinit var pDialog: ProgressDialog
 
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         setSupportActionBar(toolbar)
-        val pos = intent.getIntExtra(Const.POSITION, 0)
+        val id = intent.getStringExtra("id")
 
-        wisataList = WisataData.list()
-        toolbar.title = wisataList[pos].nama
+        pDialog = ProgressDialog(this)
+        pDialog.setMessage("Loading...")
+        pDialog.setOnCancelListener {
+            finish()
+        }
+        pDialog.show()
+        loadLokasi(id)
 
         navigasi.onClick {
             startActivity(intentFor<MapsActivity>(
-                    "nama" to wisataList[pos].nama,
-                    "lat" to wisataList[pos].lat.toString(),
-                    "lon" to wisataList[pos].lon.toString()
+                    "nama" to nama,
+                    "lat" to lat,
+                    "lon" to lon
             ))
         }
 
-        loadProdukFoto(wisataList[pos].foto)
-        sumber.text = wisataList[pos].sumber
-        alamat.text = wisataList[pos].alamat
-        deskripsi.text = wisataList[pos].deskripsi
-
         call.onClick {
             val callIntent = Intent(Intent.ACTION_CALL)
-            callIntent.data = Uri.parse("tel:"+wisataList[pos].phone)
+            callIntent.data = Uri.parse("tel:"+phone)
             startActivity(callIntent)
         }
 
@@ -58,8 +64,30 @@ class DetailActivity : AppCompatActivity() {
         setUpCall()
     }
 
-    fun loadProdukFoto(res: Array<WisataFotoModel>) {
-        val sliderAdapter = DetailFotoAdapter(this, res)
+    fun loadLokasi(id: String) {
+        FirestoreUtils.getLokasiDetail(id) {
+            toolbar.title = it.get("nama").toString()
+
+            val foto = ArrayList<WisataFotoModel>()
+
+            foto.add(WisataFotoModel(it.get("foto1").toString()))
+            foto.add(WisataFotoModel(it.get("foto2").toString()))
+            foto.add(WisataFotoModel(it.get("foto3").toString()))
+
+            loadProdukFoto(foto)
+            sumber.text = it.get("sumber").toString()
+            alamat.text = it.get("alamat").toString()
+            deskripsi.text = it.get("deskripsi").toString()
+            nama = it.get("nama").toString()
+            lat = it.get("lat").toString()
+            lon = it.get("lon").toString()
+
+            pDialog.dismiss()
+        }
+    }
+
+    fun loadProdukFoto(foto: ArrayList<WisataFotoModel>) {
+        val sliderAdapter = DetailFotoAdapter(this, foto)
         viewPager.setAdapter(sliderAdapter)
 
         dotscount = sliderAdapter.getCount()

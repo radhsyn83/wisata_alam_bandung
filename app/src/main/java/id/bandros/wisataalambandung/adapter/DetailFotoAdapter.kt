@@ -7,13 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import com.bumptech.glide.Glide
 import id.bandros.wisataalambandung.R
 import id.bandros.wisataalambandung.model.WisataFotoModel
 
 /**
  * Created by FathurRadhy on 2/17/2018.
  */
-class DetailFotoAdapter(val context: Context, private val foto: Array<WisataFotoModel>) : PagerAdapter() {
+class DetailFotoAdapter(val context: Context, private val foto: ArrayList<WisataFotoModel>) : PagerAdapter() {
     private var layoutInflater: LayoutInflater? = null
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -29,7 +30,7 @@ class DetailFotoAdapter(val context: Context, private val foto: Array<WisataFoto
         val view = layoutInflater!!.inflate(R.layout.item_detail_foto, null)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
 
-        imageView.background = context.resources.getDrawable(foto[position].foto)
+        Glide.with(context).load(foto[position].foto).into(imageView)
 
         val vp = container as ViewPager
         vp.addView(view, 0)
